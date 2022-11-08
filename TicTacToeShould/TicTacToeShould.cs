@@ -35,14 +35,13 @@ namespace TicTacToeShould {
         
         [Test]
         public void let_players_play_alternatively() {
-            /*var game = new TicTacToeGame();
+            var game = new TicTacToeGame();
             game.Play(Position.TopLeft);
             game.Play(Position.Mid);
-            game.Play(Position.BottomLeft);
 
-            var act = () => game.Play(new Position(0, 0));
+            var act = () => game.Play(Position.BottomLeft);
 
-            act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");*/
+            act.Should().NotThrow<InvalidPositionException>();
         }
 
         [Test]
