@@ -132,16 +132,27 @@ namespace TicTacToeShould {
         }
 
         public string GetWinner() {
-            if (Board[0, 0] == Player.X && Board[0, 1] == Player.X && Board[0, 2] == Player.X) {
-                return "X Won";
-            }
-            if (Board[0, 1] == Player.X && Board[1, 1] == Player.X && Board[2, 1] == Player.X) {
-                return "X Won";
-            }
-            if (Board[0, 2] == Player.X && Board[1, 2] == Player.X && Board[2, 2] == Player.X) {
-                return "X Won";
-            }
-            return "Its a draw";
+            return PlayerWonOnARow(Player.X) ? "X Won" : "Its a draw";
+        }
+
+        private bool PlayerWonOnARow(Player player) {
+            return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player);
+        }
+
+        private bool PlayerWonLastColumn(Player player) {
+            return PositionPlayedBy(0, 2, player) && PositionPlayedBy(2, 2, player) && PositionPlayedBy(2, 2, player);
+        }
+
+        private bool PlayerWonSecondColumn(Player player) {
+            return PositionPlayedBy(0, 1, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(2, 1, player);
+        }
+
+        private bool PlayerWonFirstColumn(Player player) {
+            return PositionPlayedBy(0, 0, player) && PositionPlayedBy(0, 1, player) && PositionPlayedBy(0, 2, player);
+        }
+
+        private bool PositionPlayedBy(int x, int y, Player player) {
+            return Board[x, y] == player;
         }
     }
 }
