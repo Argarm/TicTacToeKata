@@ -141,6 +141,34 @@ namespace TicTacToeShould {
             game.GetWinner().Should().Be("X Won");
         }
         
+        [Test]
+        public void set_first_player_win_if_gets_three_marks_the_last_row() {
+            var game = new TicTacToeGame();
+
+            game.Play(2, 0);
+            game.Play(0, 2);
+            game.Play(2, 1);
+
+            game.Play(0, 1);
+            game.Play(2, 2);
+
+            game.GetWinner().Should().Be("X Won");
+        }
+        
+        [Test]
+        public void set_first_player_win_if_gets_three_marks_the_left_diagonal() {
+            var game = new TicTacToeGame();
+
+            game.Play(0, 0);
+            game.Play(0, 2);
+            game.Play(1, 1);
+
+            game.Play(0, 1);
+            game.Play(2, 2);
+
+            game.GetWinner().Should().Be("X Won");
+        }
+        
     }
 
     public class TicTacToeGame {
@@ -169,7 +197,13 @@ namespace TicTacToeShould {
         }
 
         private bool PlayerWon(Player player) {
-            return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player) || PlayerWonFirstRow(player)|| PlayerWonSecondRow(player);
+            return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player)
+                   || PlayerWonFirstRow(player) || PlayerWonSecondRow(player) || PlayerWonLastRow(player)
+                   || PlayerWonLeftDiagonal(player);
+        }
+
+        private bool PlayerWonLeftDiagonal(Player player) {
+            return PositionPlayedBy(0, 0, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(2, 2, player);
         }
 
         private bool PlayerWonFirstRow(Player player) {
@@ -178,6 +212,10 @@ namespace TicTacToeShould {
 
         private bool PlayerWonSecondRow(Player player) {
             return PositionPlayedBy(1, 0, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(1, 2, player);
+        }
+
+        private bool PlayerWonLastRow(Player player) {
+            return PositionPlayedBy(2, 0, player) && PositionPlayedBy(2, 1, player) && PositionPlayedBy(2, 2, player);
         }
 
         private bool PlayerWonLastColumn(Player player) {
