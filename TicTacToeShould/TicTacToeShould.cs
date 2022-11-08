@@ -50,6 +50,21 @@ namespace TicTacToeShould {
 
             act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
         }
+        
+        [Test]
+        public void let_players_play_alternatively() {
+            var game = new TicTacToeGame();
+            var xPosition = 0;
+            var yPosition = 0;
+
+            game.Play(Player.X, 0,0 );
+            game.Play(Player.O, 0, 1);
+            game.Play(Player.X, 0, 2);
+
+            var act = () => game.Play(Player.O, xPosition, yPosition);
+
+            act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
+        }
     }
 
     public class TicTacToeGame {
