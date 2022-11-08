@@ -170,7 +170,7 @@ namespace TicTacToeShould {
         }
         
         [Test]
-        public void set_first_player_win_if_gets_three_marks_the_rigth_diagonal() {
+        public void set_first_player_win_if_gets_three_marks_the_right_diagonal() {
             var game = new TicTacToeGame();
 
             game.Play(0, 2);
@@ -213,10 +213,10 @@ namespace TicTacToeShould {
         private bool PlayerWon(Player player) {
             return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player)
                    || PlayerWonFirstRow(player) || PlayerWonSecondRow(player) || PlayerWonLastRow(player)
-                   || PlayerWonLeftDiagonal(player)|| PlayerWonRigthDiagonal(player);
+                   || PlayerWonLeftDiagonal(player) || PlayerWonRightDiagonal(player);
         }
 
-        private bool PlayerWonRigthDiagonal(Player player) {
+        private bool PlayerWonRightDiagonal(Player player) {
             return PositionPlayedBy(0, 2, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(2, 0, player);
         }
 
