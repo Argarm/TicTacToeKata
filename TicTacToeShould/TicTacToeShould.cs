@@ -16,13 +16,14 @@ namespace TicTacToeShould {
 
         [Test]
         public void set_mark_for_second_player() {
-            /*var game = new TicTacToeGame();
+            var game = new TicTacToeGame();
             var xPosition = 0;
             var yPosition = 0;
 
+            game.Play(Player.X,1,1);
             game.Play(Player.O, xPosition, yPosition);
 
-            game.Board[xPosition, yPosition].Should().Be(Player.O);*/
+            game.Board[xPosition, yPosition].Should().Be(Player.O);
         }
 
         [Test]
