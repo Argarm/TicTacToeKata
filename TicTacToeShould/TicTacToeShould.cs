@@ -26,6 +26,15 @@ namespace TicTacToeShould {
 
             game.Board[1, 1].Should().Be('X');
         }
+
+        [Test]
+        public void set_mark_for_second_player() {
+            var game = new TicTacToeGame();
+
+            game.Play('O',0,0);
+
+            game.Board[0, 0].Should().Be('O');
+        }
     }
 
     public class TicTacToeGame {
