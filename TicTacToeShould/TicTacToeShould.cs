@@ -107,7 +107,7 @@ namespace TicTacToeShould {
             game.Play(0, 0);
             game.Play(1, 2);
 
-            game.Play(1, 2);
+            game.Play(2, 0);
             game.Play(2, 2);
 
             game.GetWinner().Should().Be("X Won");
@@ -136,6 +136,9 @@ namespace TicTacToeShould {
                 return "X Won";
             }
             if (Board[0, 1] == Player.X && Board[1, 1] == Player.X && Board[2, 1] == Player.X) {
+                return "X Won";
+            }
+            if (Board[0, 2] == Player.X && Board[1, 2] == Player.X && Board[2, 2] == Player.X) {
                 return "X Won";
             }
             return "Its a draw";
