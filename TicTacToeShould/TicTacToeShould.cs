@@ -42,16 +42,33 @@ namespace TicTacToeShould {
         [Test]
         public void let_players_play_alternatively() {
             var game = new TicTacToeGame();
-            var xPosition = 0;
-            var yPosition = 0;
-
+            
             game.Play(0,0 );
             game.Play(0, 1);
             game.Play(0, 2);
 
-            var act = () => game.Play(xPosition, yPosition);
+            var act = () => game.Play(0, 0);
 
             act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
+        }
+
+        [Test]
+        public void set_draw_if_any_player_can_align_three_marks() {
+            var game = new TicTacToeGame();
+
+            game.Play(0, 0); 
+            game.Play(0, 1); 
+            game.Play(0, 2); 
+
+            game.Play(1, 1);
+            game.Play(1, 0);
+            game.Play(2, 0);
+            
+            game.Play(1, 2);
+            game.Play(2, 2);
+            game.Play(2, 1);
+
+            game.GetWinner().Should().Be("Its a draw");
         }
     }
 
@@ -69,6 +86,10 @@ namespace TicTacToeShould {
         private void ChangePlayerTurn() {
             if (playerTurn == Player.X) playerTurn = Player.O;
             else if (playerTurn == Player.O) playerTurn = Player.X;
+        }
+
+        public string GetWinner() {
+            return string.Empty;
         }
     }
 }
