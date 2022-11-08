@@ -99,6 +99,20 @@ namespace TicTacToeShould {
             game.GetWinner().Should().Be("X Won");
         }
         
+        [Test]
+        public void set_first_player_win_if_gets_three_marks_the_last_row() {
+            var game = new TicTacToeGame();
+
+            game.Play(0, 2);
+            game.Play(0, 0);
+            game.Play(1, 2);
+
+            game.Play(1, 2);
+            game.Play(2, 2);
+
+            game.GetWinner().Should().Be("X Won");
+        }
+        
     }
 
     public class TicTacToeGame {
