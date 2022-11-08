@@ -113,6 +113,20 @@ namespace TicTacToeShould {
             game.GetWinner().Should().Be("X Won");
         }
         
+        [Test]
+        public void set_first_player_win_if_gets_three_marks_the_first_row() {
+            var game = new TicTacToeGame();
+
+            game.Play(0, 0);
+            game.Play(0, 1);
+            game.Play(1, 0);
+
+            game.Play(2, 1);
+            game.Play(2, 0);
+
+            game.GetWinner().Should().Be("X Won");
+        }
+        
     }
 
     public class TicTacToeGame {
@@ -141,11 +155,15 @@ namespace TicTacToeShould {
         }
 
         private bool PlayerWon(Player player) {
-            return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player);
+            return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player) || PlayerWonFirstRow(player);
+        }
+
+        private bool PlayerWonFirstRow(Player player) {
+            return PositionPlayedBy(0, 0, player) && PositionPlayedBy(1, 0, player) && PositionPlayedBy(2, 0, player);
         }
 
         private bool PlayerWonLastColumn(Player player) {
-            return PositionPlayedBy(0, 2, player) && PositionPlayedBy(2, 2, player) && PositionPlayedBy(2, 2, player);
+            return PositionPlayedBy(0, 2, player) && PositionPlayedBy(1, 2, player) && PositionPlayedBy(2, 2, player);
         }
 
         private bool PlayerWonSecondColumn(Player player) {
