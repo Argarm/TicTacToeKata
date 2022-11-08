@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using TicTacToeKata;
 
 namespace TicTacToeShould {
     public class TicTacToeShould{
@@ -49,22 +50,6 @@ namespace TicTacToeShould {
 
             act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
         }
-    }
-
-    public class WrongPlayerTurnException : Exception {
-        public WrongPlayerTurnException() : base ("Its not your turn") {
-            
-        }
-    }
-
-    public class InvalidPositionException : Exception {
-        public InvalidPositionException() : base("The cell is already taken") { }
-    }
-
-    public enum Player {
-        X,
-        O,
-        
     }
 
     public class TicTacToeGame {
