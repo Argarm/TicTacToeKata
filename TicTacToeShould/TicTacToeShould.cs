@@ -121,7 +121,9 @@ namespace TicTacToeShould {
             if (Board[0, 0] == Player.X && Board[0, 1] == Player.X && Board[0, 2] == Player.X) {
                 return "X Won";
             }
-            
+            if (Board[0, 1] == Player.X && Board[1, 1] == Player.X && Board[2, 1] == Player.X) {
+                return "X Won";
+            }
             return "Its a draw";
         }
     }
