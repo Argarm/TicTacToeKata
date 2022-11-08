@@ -76,7 +76,12 @@ namespace TicTacToeShould {
             if (Board[x,y] == Player.X || Board[x,y] == Player.O)throw new InvalidPositionException();
             if (!IsPlayerTurn(player)) throw new WrongPlayerTurnException();
             Board[x, y] = player;
-            playerTurn = Player.O;
+            ChangePlayerTurn();
+        }
+
+        private void ChangePlayerTurn() {
+            if (playerTurn == Player.X) playerTurn = Player.O;
+            else if (playerTurn == Player.O) playerTurn = Player.X;
         }
 
         private bool IsPlayerTurn(Player player) {
