@@ -24,6 +24,18 @@ namespace TicTacToeShould {
 
             game.Board[xPosition, yPosition].Should().Be(Player.O);
         }
+
+        [Test]
+        public void not_let_player_play_two_time_in_a_row() {
+            var game = new TicTacToeGame();
+            var xPosition = 0;
+            var yPosition = 0;
+
+            game.Play(Player.X, xPosition, yPosition);
+            Action act = () => game.Play(Player.X, xPosition, yPosition);
+
+            act.Should().Throw<WrongPlayerTurnException>();
+        }
         
         [Test]
         public void throw_an_exception_if_cell_is_already_taken() {
@@ -55,6 +67,12 @@ namespace TicTacToeShould {
 
 
             game.IsFinish().Should().BeTrue();
+        }
+    }
+
+    public class WrongPlayerTurnException : Exception {
+        public WrongPlayerTurnException() : base ("Its not your turn") {
+            
         }
     }
 
