@@ -3,6 +3,9 @@ using NUnit.Framework;
 
 namespace TicTacToeShould {
     public class TicTacToeShould{
+        private const char SecondPlayerMark = 'O';
+        private const char FirstPlayerMark = 'X';
+
         [Test]
         public void have_initial_board_without_marks() {
             var game = new TicTacToeGame();
@@ -21,19 +24,23 @@ namespace TicTacToeShould {
         [Test]
         public void set_mark_for_first_player() {
             var game = new TicTacToeGame();
-            
-            game.Play('X',1, 1);
+            var xPosition = 1;
+            var yPosition = 1;
 
-            game.Board[1, 1].Should().Be('X');
+            game.Play(FirstPlayerMark,xPosition, yPosition);
+
+            game.Board[xPosition, yPosition].Should().Be(FirstPlayerMark);
         }
 
         [Test]
         public void set_mark_for_second_player() {
             var game = new TicTacToeGame();
+            var xPosition = 0;
+            var yPosition = 0;
 
-            game.Play('O',0,0);
+            game.Play(SecondPlayerMark,xPosition,yPosition);
 
-            game.Board[0, 0].Should().Be('O');
+            game.Board[xPosition, yPosition].Should().Be(SecondPlayerMark);
         }
     }
 
@@ -41,7 +48,7 @@ namespace TicTacToeShould {
         public char [,] Board { get;}
 
         public TicTacToeGame() {
-            Board = new char[,] { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
+            Board = new[,] { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
         }
 
         public void Play(char c, int x, int y) {
