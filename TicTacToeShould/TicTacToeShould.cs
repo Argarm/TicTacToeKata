@@ -72,7 +72,7 @@ namespace TicTacToeShould {
         }
 
         [Test]
-        public void set_first_player_win_if_gets_three_marks_in_the_first_row() {
+        public void set_first_player_win_if_gets_three_marks_in_the_first_column() {
             var game = new TicTacToeGame();
 
             game.Play(0, 0);
@@ -86,7 +86,7 @@ namespace TicTacToeShould {
         }
         
         [Test]
-        public void set_first_player_win_if_gets_three_marks_the_second_row() {
+        public void set_first_player_win_if_gets_three_marks_the_second_column() {
             var game = new TicTacToeGame();
 
             game.Play(0, 1);
@@ -100,7 +100,7 @@ namespace TicTacToeShould {
         }
         
         [Test]
-        public void set_first_player_win_if_gets_three_marks_the_last_row() {
+        public void set_first_player_win_if_gets_three_marks_the_last_column() {
             var game = new TicTacToeGame();
 
             game.Play(0, 2);
@@ -132,10 +132,15 @@ namespace TicTacToeShould {
         }
 
         public string GetWinner() {
-            return PlayerWonOnARow(Player.X) ? "X Won" : "Its a draw";
+            if (PlayerWon(Player.X)) {
+                return "X Won";
+            } if (PlayerWon(Player.O)) {
+                return "O Won";
+            }
+            return "Its a draw";
         }
 
-        private bool PlayerWonOnARow(Player player) {
+        private bool PlayerWon(Player player) {
             return PlayerWonFirstColumn(player) || PlayerWonSecondColumn(player) || PlayerWonLastColumn(player);
         }
 
