@@ -57,9 +57,12 @@ namespace TicTacToeShould {
     }
 
     public class InvalidPositionException : Exception {
+        public InvalidPositionException() : base("The cell is already taken") { }
     }
 
     public class TicTacToeGame {
+        private const char SecondPlayerMark = 'O';
+        private const char FirstPlayerMark = 'X';
         public char [,] Board { get;}
 
         public TicTacToeGame() {
@@ -67,6 +70,7 @@ namespace TicTacToeShould {
         }
 
         public void Play(char c, int x, int y) {
+            if (Board[x,y] == FirstPlayerMark || Board[x,y] == SecondPlayerMark)throw new InvalidPositionException();
             Board[x, y] = c;
         }
     }
