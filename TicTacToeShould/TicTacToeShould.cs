@@ -104,6 +104,9 @@ namespace TicTacToeShould {
         }
 
         public string GetWinner() {
+            if (Board[0, 0] == Player.X && Board[0, 1] == Player.X && Board[0, 2] == Player.X) {
+                return "X Won";
+            }
             return "Its a draw";
         }
     }
