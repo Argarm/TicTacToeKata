@@ -7,63 +7,57 @@ namespace TicTacToeShould {
         [Test]
         public void set_mark_for_first_player() {
             var game = new TicTacToeGame();
-            var xPosition = 1;
-            var yPosition = 1;
 
-            game.Play(xPosition, yPosition);
+            game.Play(Position.Mid);
 
-            game.Board[xPosition, yPosition].Should().Be(Player.X);
+            game.Board[Position.Mid].Should().Be(Player.X);
         }
 
         [Test]
         public void set_mark_for_second_player() {
             var game = new TicTacToeGame();
-            var xPosition = 0;
-            var yPosition = 0;
-            game.Play(1,1);
+            game.Play(Position.Mid);
 
-            game.Play(xPosition, yPosition);
+            game.Play(Position.TopLeft);
 
-            game.Board[xPosition, yPosition].Should().Be(Player.O);
+            game.Board[Position.TopLeft].Should().Be(Player.O);
         }
 
         [Test]
         public void throw_an_exception_if_cell_is_already_taken() {
             var game = new TicTacToeGame();
-            var xPosition = 0;
-            var yPosition = 0;
-            game.Play(xPosition, yPosition);
+            game.Play(Position.Mid);
 
-            var act = () => game.Play(xPosition, yPosition);
+            var act = () => game.Play(Position.Mid);
 
             act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
         }
         
         [Test]
         public void let_players_play_alternatively() {
-            var game = new TicTacToeGame();
-            game.Play(0,0 );
-            game.Play(0, 1);
-            game.Play(0, 2);
+            /*var game = new TicTacToeGame();
+            game.Play(Position.TopLeft);
+            game.Play(Position.Mid);
+            game.Play(Position.BottomLeft);
 
-            var act = () => game.Play(0, 0);
+            var act = () => game.Play(new Position(0, 0));
 
-            act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
+            act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");*/
         }
 
         [Test]
         public void set_draw_if_any_player_cant_align_three_marks() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 0); 
-            game.Play(0, 1); 
-            game.Play(0, 2);
-            game.Play(1, 1);
-            game.Play(1, 0);
-            game.Play(2, 0);
-            game.Play(1, 2);
-            game.Play(2, 2);
-            game.Play(2, 1);
+            game.Play(Position.TopLeft); 
+            game.Play(Position.TopMid); 
+            game.Play(Position.TopRight);
+            game.Play(Position.Mid);
+            game.Play(Position.MidLeft);
+            game.Play(Position.MidRight);
+            game.Play(Position.BottomMid);
+            game.Play(Position.BottomLeft);
+            game.Play(Position.BottomRight);
 
             game.GetWinner().Should().Be("Its a draw");
         }
@@ -72,11 +66,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_in_the_first_column() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 0);
-            game.Play(1, 1);
-            game.Play(0, 1);
-            game.Play(1, 2);
-            game.Play(0, 2);
+            game.Play(Position.TopLeft);
+            game.Play(Position.Mid);
+            game.Play(Position.MidLeft);
+            game.Play(Position.MidRight);
+            game.Play(Position.BottomLeft);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -85,11 +79,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_second_column() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 1);
-            game.Play(0, 0);
-            game.Play(1, 1);
-            game.Play(1, 2);
-            game.Play(2, 1);
+            game.Play(Position.TopMid);
+            game.Play(Position.TopLeft);
+            game.Play(Position.Mid);
+            game.Play(Position.MidRight);
+            game.Play(Position.BottomMid);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -98,11 +92,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_last_column() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 2);
-            game.Play(0, 0);
-            game.Play(1, 2);
-            game.Play(2, 0);
-            game.Play(2, 2);
+            game.Play(Position.TopRight);
+            game.Play(Position.TopLeft);
+            game.Play(Position.MidRight);
+            game.Play(Position.BottomLeft);
+            game.Play(Position.BottomRight);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -111,11 +105,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_first_row() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 0);
-            game.Play(1, 1);
-            game.Play(0, 1);
-            game.Play(2, 1);
-            game.Play(0, 2);
+            game.Play(Position.TopLeft);
+            game.Play(Position.Mid);
+            game.Play(Position.TopMid);
+            game.Play(Position.BottomMid);
+            game.Play(Position.TopRight);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -124,11 +118,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_second_row() {
             var game = new TicTacToeGame();
 
-            game.Play(1, 0);
-            game.Play(0, 2);
-            game.Play(1, 1);
-            game.Play(2, 1);
-            game.Play(1, 2);
+            game.Play(Position.MidLeft);
+            game.Play(Position.TopLeft);
+            game.Play(Position.Mid);
+            game.Play(Position.BottomLeft);
+            game.Play(Position.MidRight);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -137,11 +131,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_last_row() {
             var game = new TicTacToeGame();
 
-            game.Play(2, 0);
-            game.Play(0, 2);
-            game.Play(2, 1);
-            game.Play(0, 1);
-            game.Play(2, 2);
+            game.Play(Position.BottomLeft);
+            game.Play(Position.TopLeft);
+            game.Play(Position.BottomMid);
+            game.Play(Position.Mid);
+            game.Play(Position.BottomRight);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -150,11 +144,11 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_left_diagonal() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 0);
-            game.Play(0, 2);
-            game.Play(1, 1);
-            game.Play(0, 1);
-            game.Play(2, 2);
+            game.Play(Position.TopLeft);
+            game.Play(Position.TopMid);
+            game.Play(Position.Mid);
+            game.Play(Position.TopRight);
+            game.Play(Position.BottomRight);
 
             game.GetWinner().Should().Be("X Won");
         }
@@ -163,25 +157,48 @@ namespace TicTacToeShould {
         public void set_first_player_win_if_gets_three_marks_the_right_diagonal() {
             var game = new TicTacToeGame();
 
-            game.Play(0, 2);
-            game.Play(1, 2);
-            game.Play(1, 1);
-            game.Play(0, 1);
-            game.Play(2, 0);
+            game.Play(Position.TopRight);
+            game.Play(Position.MidRight);
+            game.Play(Position.Mid);
+            game.Play(Position.TopLeft);
+            game.Play(Position.BottomLeft);
 
             game.GetWinner().Should().Be("X Won");
         }
         
     }
 
+    public enum Position {
+        TopLeft,
+        TopMid,
+        TopRight,
+        MidLeft,
+        Mid,
+        MidRight,
+        BottomLeft,
+        BottomMid,
+        BottomRight
+    }
+
     public class TicTacToeGame {
         private Player playerTurn = Player.X;
 
-        public Player?[,] Board = new Player?[3, 3];
+        public Dictionary<Position, Player?> Board = new Dictionary<Position, Player?> {
+            { Position.TopLeft , null},
+            { Position.TopMid, null},
+            { Position.TopRight, null},
+            { Position.MidLeft , null},
+            { Position.Mid, null},
+            { Position.MidRight, null},
+            { Position.BottomLeft, null},
+            { Position.BottomMid, null},
+            { Position.BottomRight, null},
 
-        public void Play(int x, int y) {
-            if (Board[x,y] == Player.X || Board[x,y] == Player.O)throw new InvalidPositionException();
-            Board[x, y] = playerTurn;
+        };
+
+        public void Play(Position position) {
+            if (Board[position] == Player.X || Board[position] == Player.O)throw new InvalidPositionException();
+            Board[position] = playerTurn;
             ChangePlayerTurn();
         }
 
@@ -205,40 +222,40 @@ namespace TicTacToeShould {
                    || PlayerWonLeftDiagonal(player) || PlayerWonRightDiagonal(player);
         }
 
-        private bool PlayerWonRightDiagonal(Player player) {
-            return PositionPlayedBy(0, 2, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(2, 0, player);
+        private bool PlayerWonLeftDiagonal(Player player) {
+            return PositionPlayedBy(Position.TopLeft, player) && PositionPlayedBy(Position.Mid, player) && PositionPlayedBy(Position.BottomRight, player);
         }
 
-        private bool PlayerWonLeftDiagonal(Player player) {
-            return PositionPlayedBy(0, 0, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(2, 2, player);
+        private bool PlayerWonRightDiagonal(Player player) {
+            return PositionPlayedBy(Position.TopRight, player) && PositionPlayedBy(Position.Mid, player) && PositionPlayedBy(Position.BottomLeft, player);
         }
 
         private bool PlayerWonFirstRow(Player player) {
-            return PositionPlayedBy(0, 0, player) && PositionPlayedBy(1, 0, player) && PositionPlayedBy(2, 0, player);
+            return PositionPlayedBy(Position.TopLeft, player) && PositionPlayedBy(Position.TopMid, player) && PositionPlayedBy(Position.TopRight, player);
         }
 
         private bool PlayerWonSecondRow(Player player) {
-            return PositionPlayedBy(1, 0, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(1, 2, player);
+            return PositionPlayedBy(Position.MidLeft, player) && PositionPlayedBy(Position.Mid, player) && PositionPlayedBy(Position.MidRight, player);
         }
 
         private bool PlayerWonLastRow(Player player) {
-            return PositionPlayedBy(2, 0, player) && PositionPlayedBy(2, 1, player) && PositionPlayedBy(2, 2, player);
-        }
-
-        private bool PlayerWonLastColumn(Player player) {
-            return PositionPlayedBy(0, 2, player) && PositionPlayedBy(1, 2, player) && PositionPlayedBy(2, 2, player);
-        }
-
-        private bool PlayerWonSecondColumn(Player player) {
-            return PositionPlayedBy(0, 1, player) && PositionPlayedBy(1, 1, player) && PositionPlayedBy(2, 1, player);
+            return PositionPlayedBy(Position.BottomLeft, player) && PositionPlayedBy(Position.BottomMid, player) && PositionPlayedBy(Position.BottomRight, player);
         }
 
         private bool PlayerWonFirstColumn(Player player) {
-            return PositionPlayedBy(0, 0, player) && PositionPlayedBy(0, 1, player) && PositionPlayedBy(0, 2, player);
+            return PositionPlayedBy(Position.TopLeft, player) && PositionPlayedBy(Position.MidLeft, player) && PositionPlayedBy(Position.BottomLeft, player);
         }
 
-        private bool PositionPlayedBy(int x, int y, Player player) {
-            return Board[x, y] == player;
+        private bool PlayerWonSecondColumn(Player player) {
+            return PositionPlayedBy(Position.TopMid, player) && PositionPlayedBy(Position.Mid, player) && PositionPlayedBy(Position.BottomMid, player);
+        }
+
+        private bool PlayerWonLastColumn(Player player) {
+            return PositionPlayedBy(Position.TopRight, player) && PositionPlayedBy(Position.MidRight, player) && PositionPlayedBy(Position.BottomRight, player);
+        }
+
+        private bool PositionPlayedBy(Position position, Player player) {
+            return Board[position] == player;
         }
     }
 }
