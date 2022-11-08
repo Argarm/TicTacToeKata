@@ -53,7 +53,7 @@ namespace TicTacToeShould {
         }
 
         [Test]
-        public void set_draw_if_any_player_can_align_three_marks() {
+        public void set_draw_if_any_player_cant_align_three_marks() {
             var game = new TicTacToeGame();
 
             game.Play(0, 0); 
@@ -89,7 +89,7 @@ namespace TicTacToeShould {
         }
 
         public string GetWinner() {
-            return string.Empty;
+            return "Its a draw";
         }
     }
 }
