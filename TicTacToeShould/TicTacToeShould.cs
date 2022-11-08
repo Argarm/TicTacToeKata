@@ -95,7 +95,15 @@ namespace TicTacToeShould {
         }
 
         public bool IsFinish() {
-            return false;
+            return Board[0, 0] != '1' &&
+                Board[0, 1] != '2' &&
+                Board[0, 2] != '3' &&
+                Board[1, 0] != '4' &&
+                Board[1, 1] != '5' &&
+                Board[1, 2] != '6' &&
+                Board[2, 0] != '7' &&
+                Board[2, 1] != '8' &&
+                Board[2, 2] != '9';
         }
     }
 }
