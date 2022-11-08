@@ -42,6 +42,21 @@ namespace TicTacToeShould {
 
             game.Board[xPosition, yPosition].Should().Be(SecondPlayerMark);
         }
+        
+        [Test]
+        public void throw_an_exception_if_cell_is_already_taken() {
+            var game = new TicTacToeGame();
+            var xPosition = 0;
+            var yPosition = 0;
+            game.Play(FirstPlayerMark,xPosition,yPosition);
+
+            var act = () => game.Play(SecondPlayerMark,xPosition,yPosition);
+
+            act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
+        }
+    }
+
+    public class InvalidPositionException : Exception {
     }
 
     public class TicTacToeGame {
