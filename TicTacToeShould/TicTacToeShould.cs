@@ -17,6 +17,15 @@ namespace TicTacToeShould {
             game.Board[2, 1].Should().Be('8');
             game.Board[2, 2].Should().Be('9');
         }
+
+        [Test]
+        public void METHOD() {
+            var game = new TicTacToeGame();
+            
+            game.Play('X',1, 1);
+
+            game.Board[1, 1].Should().Be('X');
+        }
     }
 
     public class TicTacToeGame {
@@ -24,6 +33,10 @@ namespace TicTacToeShould {
 
         public TicTacToeGame() {
             Board = new char[,] { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
+        }
+
+        public void Play(char c, int x, int y) {
+            
         }
     }
 }
