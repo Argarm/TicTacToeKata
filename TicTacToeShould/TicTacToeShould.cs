@@ -20,8 +20,8 @@ namespace TicTacToeShould {
             var game = new TicTacToeGame();
             var xPosition = 0;
             var yPosition = 0;
-
             game.Play(1,1);
+
             game.Play(xPosition, yPosition);
 
             game.Board[xPosition, yPosition].Should().Be(Player.O);
@@ -42,7 +42,6 @@ namespace TicTacToeShould {
         [Test]
         public void let_players_play_alternatively() {
             var game = new TicTacToeGame();
-            
             game.Play(0,0 );
             game.Play(0, 1);
             game.Play(0, 2);
@@ -58,12 +57,10 @@ namespace TicTacToeShould {
 
             game.Play(0, 0); 
             game.Play(0, 1); 
-            game.Play(0, 2); 
-
+            game.Play(0, 2);
             game.Play(1, 1);
             game.Play(1, 0);
             game.Play(2, 0);
-            
             game.Play(1, 2);
             game.Play(2, 2);
             game.Play(2, 1);
@@ -78,7 +75,6 @@ namespace TicTacToeShould {
             game.Play(0, 0);
             game.Play(1, 1);
             game.Play(0, 1);
-
             game.Play(1, 2);
             game.Play(0, 2);
 
@@ -92,7 +88,6 @@ namespace TicTacToeShould {
             game.Play(0, 1);
             game.Play(0, 0);
             game.Play(1, 1);
-
             game.Play(1, 2);
             game.Play(2, 1);
 
@@ -106,7 +101,6 @@ namespace TicTacToeShould {
             game.Play(0, 2);
             game.Play(0, 0);
             game.Play(1, 2);
-
             game.Play(2, 0);
             game.Play(2, 2);
 
@@ -120,7 +114,6 @@ namespace TicTacToeShould {
             game.Play(0, 0);
             game.Play(1, 1);
             game.Play(0, 1);
-
             game.Play(2, 1);
             game.Play(0, 2);
 
@@ -134,7 +127,6 @@ namespace TicTacToeShould {
             game.Play(1, 0);
             game.Play(0, 2);
             game.Play(1, 1);
-
             game.Play(2, 1);
             game.Play(1, 2);
 
@@ -148,7 +140,6 @@ namespace TicTacToeShould {
             game.Play(2, 0);
             game.Play(0, 2);
             game.Play(2, 1);
-
             game.Play(0, 1);
             game.Play(2, 2);
 
@@ -162,7 +153,6 @@ namespace TicTacToeShould {
             game.Play(0, 0);
             game.Play(0, 2);
             game.Play(1, 1);
-
             game.Play(0, 1);
             game.Play(2, 2);
 
@@ -176,7 +166,6 @@ namespace TicTacToeShould {
             game.Play(0, 2);
             game.Play(1, 2);
             game.Play(1, 1);
-
             game.Play(0, 1);
             game.Play(2, 0);
 
