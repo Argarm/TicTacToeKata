@@ -54,6 +54,26 @@ namespace TicTacToeShould {
 
             act.Should().Throw<InvalidPositionException>().WithMessage("The cell is already taken");
         }
+        
+        [Test]
+        public void finish_a_game_when_all_fields_are_taken() {
+            var game = new TicTacToeGame();
+            
+            game.Play(SecondPlayerMark,0,0);
+            game.Play(SecondPlayerMark,0,1);
+            game.Play(FirstPlayerMark,0,2);
+
+            game.Play(FirstPlayerMark,1,0);
+            game.Play(FirstPlayerMark,1,1);
+            game.Play(SecondPlayerMark,1,2);
+            
+            game.Play(SecondPlayerMark,2,0);
+            game.Play(FirstPlayerMark,2,1);
+            game.Play(SecondPlayerMark, 2, 2);
+
+
+            game.IsFinish().Should().BeTrue();
+        }
     }
 
     public class InvalidPositionException : Exception {
@@ -72,6 +92,10 @@ namespace TicTacToeShould {
         public void Play(char c, int x, int y) {
             if (Board[x,y] == FirstPlayerMark || Board[x,y] == SecondPlayerMark)throw new InvalidPositionException();
             Board[x, y] = c;
+        }
+
+        public bool IsFinish() {
+            return false;
         }
     }
 }
