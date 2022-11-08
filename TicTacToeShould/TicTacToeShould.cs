@@ -19,7 +19,7 @@ namespace TicTacToeShould {
         }
 
         [Test]
-        public void METHOD() {
+        public void set_mark_for_first_player() {
             var game = new TicTacToeGame();
             
             game.Play('X',1, 1);
@@ -36,7 +36,7 @@ namespace TicTacToeShould {
         }
 
         public void Play(char c, int x, int y) {
-            
+            Board[x, y] = c;
         }
     }
 }
