@@ -70,6 +70,21 @@ namespace TicTacToeShould {
 
             game.GetWinner().Should().Be("Its a draw");
         }
+
+
+        [Test]
+        public void set_first_player_win_if_gets_three_marks_in_a_row() {
+            var game = new TicTacToeGame();
+
+            game.Play(0, 0);
+            game.Play(1, 1);
+            game.Play(0, 1);
+
+            game.Play(1, 2);
+            game.Play(0, 2);
+
+            game.GetWinner().Should().Be("X Won");
+        }
     }
 
     public class TicTacToeGame {
